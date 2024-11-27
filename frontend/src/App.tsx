@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './index.css'
+import numberService from './services/numberService'
 
 function App() {
   const [cells, setCells] = useState(Array(28).fill(Array(28).fill(0)))
@@ -9,6 +10,10 @@ function App() {
     value: number,
     row: number,
     column: number
+  }
+
+  interface InferenceProps {
+    matrix: number[][]
   }
 
 
@@ -48,6 +53,12 @@ function App() {
     )
   }
 
+  function Infer({ matrix } : InferenceProps) {
+    return (
+      <button onClick={() => numberService.infer(matrix)}>Infer</button>
+    )
+  }
+
   return (
     <>
       <div 
@@ -61,6 +72,7 @@ function App() {
           })}
       </div>
       <Reset/>
+      <Infer matrix={cells}/>
     </>
   )
 }
