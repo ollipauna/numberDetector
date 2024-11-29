@@ -14,11 +14,11 @@ function App() {
   }
 
   interface InferenceProps {
-    matrix: number[][]
+    cells: number[][]
   }
 
-  const inference = async (matrix: number[][]) => {
-    const response = await numberService.infer(matrix)
+  const inference = async (cells: number[][]) => {
+    const response = await numberService.infer(cells)
     setNumber(response)
   }
 
@@ -59,9 +59,9 @@ function App() {
     )
   }
 
-  function Infer({ matrix } : InferenceProps) {
+  function Infer({ cells } : InferenceProps) {
     return (
-      <button onClick={() => inference(matrix)}>Infer</button>
+      <button onClick={() => inference(cells)}>Infer</button>
     )
   }
 
@@ -81,7 +81,7 @@ function App() {
         <div>{number}</div>
       }
       <Reset/>
-      <Infer matrix={cells}/>
+      <Infer cells={cells}/>
     </>
   )
 }
