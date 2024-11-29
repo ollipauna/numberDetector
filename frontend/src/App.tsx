@@ -5,6 +5,7 @@ import numberService from './services/numberService'
 function App() {
   const [cells, setCells] = useState(Array(28).fill(Array(28).fill(0)))
   const [paint, setPaint] = useState(false)
+  const [number, setNumber] = useState(false)
 
   interface CellProps {
     value: number,
@@ -14,6 +15,11 @@ function App() {
 
   interface InferenceProps {
     matrix: number[][]
+  }
+
+  const inference = async (matrix: number[][]) => {
+    const response = await numberService.infer(matrix)
+    setNumber(response)
   }
 
 
@@ -40,7 +46,7 @@ function App() {
     vector: number[],
     row: number,
   }
-
+  
   function Row({vector, row}: RowPorps) {
     return (
       <div className="row">{vector.map((value, index) => <Cell value={value} row={row} column={index} key={`${row}-${index}`}/>)}</div>
@@ -55,7 +61,7 @@ function App() {
 
   function Infer({ matrix } : InferenceProps) {
     return (
-      <button onClick={() => numberService.infer(matrix)}>Infer</button>
+      <button onClick={() => inference(matrix)}>Infer</button>
     )
   }
 
@@ -71,6 +77,9 @@ function App() {
           return <Row vector={row} key={`row-${index}`} row={index}/>
           })}
       </div>
+      {number && 
+        <div>{number}</div>
+      }
       <Reset/>
       <Infer matrix={cells}/>
     </>

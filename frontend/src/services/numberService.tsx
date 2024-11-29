@@ -7,8 +7,8 @@ const infer = async (matrix: number[][]) => {
             data: JSON.stringify(matrix)
         }
     )
-
-    return response
+    console.log(response.data)
+    return response.data
 } 
 
 export default { infer }
