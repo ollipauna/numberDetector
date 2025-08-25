@@ -22,6 +22,11 @@ function App() {
     setNumber(response)
   }
 
+  const handleReset = async () => {
+    setCells(Array(28).fill(Array(28).fill(0)))
+    setNumber(false)
+  }
+
 
   function Cell ({value, row, column}: CellProps) {
     const intensity = 1 - value;
@@ -55,7 +60,7 @@ function App() {
 
   function Reset() {
     return (
-      <button onClick={() => setCells(Array(28).fill(Array(28).fill(0)))}>Reset</button>
+      <button onClick={() => handleReset()}>Reset</button>
     )
   }
 
